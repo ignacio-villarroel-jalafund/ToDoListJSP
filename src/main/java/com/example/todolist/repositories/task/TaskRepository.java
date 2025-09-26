@@ -1,11 +1,22 @@
 package com.example.todolist.repositories.task;
 
 import com.example.todolist.models.Task;
+import com.example.todolist.services.task.TaskService;
 
 import java.util.*;
 
 public class TaskRepository implements TaskRepositoryInterface {
+    private static TaskRepository taskRepository;
     private static Map<String, Task> tasks = new LinkedHashMap<>();
+
+    private TaskRepository() {}
+
+    public static TaskRepository getInstance() {
+        if (taskRepository == null) {
+            taskRepository = new TaskRepository();
+        }
+        return taskRepository;
+    }
 
     @Override
     public Task add(Task object) {

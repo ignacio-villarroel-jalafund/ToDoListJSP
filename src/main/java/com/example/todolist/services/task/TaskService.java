@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TaskService implements TaskServiceInterface {
     private static TaskService taskService;
-    private TaskRepositoryInterface repository = new TaskRepository();
+    private TaskRepositoryInterface repository = TaskRepository.getInstance();
     private final int MAX_RESULTS = 6;
 
     private TaskService() {}

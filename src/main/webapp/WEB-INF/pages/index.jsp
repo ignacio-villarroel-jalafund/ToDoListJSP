@@ -6,7 +6,7 @@
         <h1>List of To Dos</h1>
     </div>
     <form action="/TodoList/new" method="post">
-        <input type="submit" value="Add" class="btn"/>
+        <input type="submit" value="Add +" class="btn" style="background-color: green; color: white; font-size: 20px; padding: 0 50px;"/>
     </form>
     <jsp:include page="table.jsp" />
 </div>
