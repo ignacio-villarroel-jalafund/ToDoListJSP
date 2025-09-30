@@ -7,6 +7,7 @@ import com.example.todolist.repositories.task.TaskRepositoryInterface;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class TaskService implements TaskServiceInterface {
     private static TaskService taskService;
@@ -28,7 +29,7 @@ public class TaskService implements TaskServiceInterface {
     }
 
     @Override
-    public Task get(String id) {
+    public Task get(UUID id) {
         return repository.get(id);
     }
 
@@ -43,7 +44,7 @@ public class TaskService implements TaskServiceInterface {
     }
 
     @Override
-    public Task delete(String id) {
+    public Task delete(UUID id) {
         return repository.delete(id);
     }
 

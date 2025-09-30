@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.UUID;
 
 @WebServlet(name = "toDoDelete", value = "/TodoList/delete/")
 public class TaskDelete extends HttpServlet {
@@ -18,8 +19,11 @@ public class TaskDelete extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        Task task = taskService.get(req.getParameter("id"));
+        String id = req.getParameter("id");
+        System.out.println("id: " + id);
+        Task task = taskService.get(UUID.fromString(id));
         if (task != null) {
+            System.out.println(task.getTitle());
             taskService.delete(task.getId());
         }
         resp.sendRedirect("/");

@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.example.todolist.models.Task" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@page import="org.apache.commons.text.StringEscapeUtils" %>
 <html>
 <head>
     <title>Todo Application</title>
@@ -26,8 +27,8 @@
                     for (Task t : tasks) {
             %>
             <tr>
-                <td><%= t.getTitle() %></td>
-                <td><%= t.getDescription() %></td>
+                <td><%= StringEscapeUtils.escapeHtml4(t.getTitle()) %></td>
+                <td><%= StringEscapeUtils.escapeHtml4(t.getDescription()) %></td>
                 <td><%= t.getStatus() %></td>
                 <td><%= t.getStartDate()%></td>
                 <td><%= t.getTargetDate() %></td>
@@ -38,7 +39,10 @@
                         <input class="action-btn" type="submit" value="Edit"/>
                     </form>
                     <form id="deleteForm" action="/TodoList/delete/?id=<%=t.getId()%>" method="post">
-                        <button type="button" onclick="showModal()">Delete</button>
+                        <button type="button"
+                                onclick="openConfirm('deleteForm', 'Delete task', 'Are you sure you want to delete this task?')">
+                            Delete
+                        </button>
                     </form>
                 </td>
             </tr>
@@ -55,7 +59,8 @@
                     for (int i = 1; i < totalPages + 1; i++) {
             %>
             <a
-                    class="pagination-item <%=request.getParameter("page") != null &&  Integer.parseInt(request.getParameter("page")) == i ? "pagination-selected" : ""%>"
+                    class="pagination-item <%=request.getParameter("page") != null &&
+                      Integer.parseInt(request.getParameter("page")) == i ? "pagination-selected" : ""%>"
                     href="/TodoList?page=<%=i%>"><%=i%>
             </a>
             <%
@@ -64,30 +69,6 @@
             %>
         </nav>
     </div>
-    <div id="confirmModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: white;">
-        <div class="modal-content" style="margin: 15% auto; padding: 20px; border: 1px solid black; width: 80%; max-width: 500px; border-radius: 8px">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Confirm Action</h2>
-            <p>Are you sure you want to proceed with this action?</p>
-            <button onclick="confirmAction()">Accept</button>
-            <button onclick="closeModal()">Cancel</button>
-        </div>
-    </div>
-    <script>
-        var modal = document.getElementById('confirmModal');
-
-        function showModal() {
-            modal.style.display = "block";
-        }
-
-        function closeModal() {
-            modal.style.display = "none";
-        }
-
-        function confirmAction() {
-            var form = document.getElementById("deleteForm");
-            form.submit();
-        }
-    </script>
+    <jsp:include page="confirmDialog.jsp"/>
     </body>
 </html>

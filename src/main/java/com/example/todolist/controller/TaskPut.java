@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.UUID;
 
 @WebServlet(name = "toDoListPut", value = "/TodoList/edit/")
 public class TaskPut extends HttpServlet {
@@ -20,7 +21,8 @@ public class TaskPut extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        Task task = taskService.get(req.getParameter("id"));
+        String id = req.getParameter("id");
+        Task task = taskService.get(UUID.fromString(id));
         task.setTitle(req.getParameter("title"));
         task.setDescription(req.getParameter("description"));
         String newStatus = req.getParameter("status");
@@ -46,8 +48,9 @@ public class TaskPut extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String id = request.getParameter("id");
         request.setAttribute("action", "edit");
-        request.setAttribute("task", taskService.get(request.getParameter("id")));
+        request.setAttribute("task", taskService.get(UUID.fromString(id)));
         request.getRequestDispatcher("/WEB-INF/pages/form.jsp").forward(request, response);
     }
 }
