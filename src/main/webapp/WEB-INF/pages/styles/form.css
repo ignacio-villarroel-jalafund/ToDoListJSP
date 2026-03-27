@@ -1,0 +1,62 @@
+.principalForm {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.principalForm h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 25px;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555;
+    font-weight: 600;
+    font-family: Arial, sans-serif;
+}
+
+input[type="text"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.principalForm button[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.principalForm button[type="submit"]:hover {
+    background-color: #0056b3;
+}
